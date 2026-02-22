@@ -31,6 +31,7 @@ import {
   HiOutlineLightningBolt,
   HiOutlineBadgeCheck,
   HiOutlineTag,
+  HiOutlineHeart,
 } from 'react-icons/hi'
 
 // ---- Constants ----
@@ -650,6 +651,20 @@ export default function Page() {
                 <AgentInfoPanel activeAgentId={activeAgentId} />
               </div>
             )}
+
+            {/* Donate button */}
+            <div className={`px-3 ${sidebarCollapsed ? 'flex justify-center' : ''}`}>
+              <a
+                href="https://GoFundMe.me/3f8fbf1b2"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 bg-gradient-to-r from-rose-500 to-pink-500 text-white hover:from-rose-600 hover:to-pink-600 shadow-md shadow-rose-500/20 ${sidebarCollapsed ? 'justify-center px-2' : 'w-full'}`}
+                title="Support Our Mission"
+              >
+                <HiOutlineHeart className="w-5 h-5 flex-shrink-0" />
+                {!sidebarCollapsed && <span>Donate to Our Cause</span>}
+              </a>
+            </div>
 
             {/* Collapse toggle */}
             <div className="p-3 border-t border-border">
