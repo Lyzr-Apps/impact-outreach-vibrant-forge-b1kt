@@ -1,0 +1,38 @@
+{
+  "agent_name": "App Builder Agent",
+  "agent_id": "699b5df3efd91aca1f09f67f",
+  "description": "A powerful AI agent that takes natural language app descriptions and generates complete app specifications including architecture, features, tech stack recommendations, database schemas, API designs, UI/UX wireframe descriptions, code snippets, and deployment guidance. It creates comprehensive, production-ready app blueprints for free.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "app_name": "string",
+    "app_description": "string",
+    "target_audience": "string",
+    "tech_stack": "string",
+    "features": "string",
+    "architecture": "string",
+    "database_schema": "string",
+    "api_design": "string",
+    "ui_design": "string",
+    "code_snippets": "string",
+    "deployment_guide": "string",
+    "estimated_timeline": "string",
+    "cost_estimate": "string"
+  },
+  "example_response": {
+    "app_name": "sample string",
+    "app_description": "sample string",
+    "target_audience": "sample string",
+    "tech_stack": "sample string",
+    "features": "sample string",
+    "architecture": "sample string",
+    "database_schema": "sample string",
+    "api_design": "sample string",
+    "ui_design": "sample string",
+    "code_snippets": "sample string",
+    "deployment_guide": "sample string",
+    "estimated_timeline": "sample string",
+    "cost_estimate": "sample string"
+  }
+}

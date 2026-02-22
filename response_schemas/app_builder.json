@@ -1,0 +1,21 @@
+{
+  "agent_name": "App Builder Agent",
+  "agent_type": "json",
+  "accessor": "json",
+  "has_module_outputs": false,
+  "schema": {
+    "app_name": "string",
+    "app_description": "string",
+    "target_audience": "string",
+    "tech_stack": "string",
+    "features": "string",
+    "architecture": "string",
+    "database_schema": "string",
+    "api_design": "string",
+    "ui_design": "string",
+    "code_snippets": "string",
+    "deployment_guide": "string",
+    "estimated_timeline": "string",
+    "cost_estimate": "string"
+  }
+}

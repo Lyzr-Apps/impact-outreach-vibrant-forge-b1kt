@@ -1,15 +1,34 @@
 {
+  "workflow_name": "AppForge - AI App Builder",
   "nodes": [
-    { "id": "input_node", "type": "Input", "label": "User Input", "nodeCategory": "input" },
-    { "id": "outreach_email_generator", "type": "Agent", "label": "Outreach Email Generator Agent", "nodeCategory": "agent" },
-    { "id": "email_sender", "type": "Agent", "label": "Email Sender Agent", "nodeCategory": "agent" },
-    { "id": "engagement_analyzer", "type": "Agent", "label": "Engagement Analyzer Agent", "nodeCategory": "agent" },
-    { "id": "followup_composer", "type": "Agent", "label": "Follow-Up Composer Agent", "nodeCategory": "agent" }
+    {
+      "id": "input_node",
+      "type": "Input",
+      "label": "User App Description",
+      "nodeCategory": "input"
+    },
+    {
+      "id": "app_builder_agent",
+      "type": "Agent",
+      "label": "App Builder Agent",
+      "nodeCategory": "agent",
+      "agent_id": "699b5df3efd91aca1f09f67f"
+    },
+    {
+      "id": "output_node",
+      "type": "Output",
+      "label": "Generated App",
+      "nodeCategory": "end"
+    }
   ],
   "edges": [
-    { "source": "input_node", "target": "outreach_email_generator" },
-    { "source": "outreach_email_generator", "target": "email_sender" },
-    { "source": "email_sender", "target": "engagement_analyzer" },
-    { "source": "engagement_analyzer", "target": "followup_composer" }
+    {
+      "source": "input_node",
+      "target": "app_builder_agent"
+    },
+    {
+      "source": "app_builder_agent",
+      "target": "output_node"
+    }
   ]
 }

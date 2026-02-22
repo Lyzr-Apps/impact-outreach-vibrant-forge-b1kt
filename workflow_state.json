@@ -1,20 +1,8 @@
 {
   "agents": {
-    "outreach_email_generator": {
-      "agent_id": "699b56e499a581580fa60369",
-      "name": "Outreach Email Generator Agent"
-    },
-    "email_sender": {
-      "agent_id": "699b56fb67cd897226785e4f",
-      "name": "Email Sender Agent"
-    },
-    "engagement_analyzer": {
-      "agent_id": "699b570d1558055656c1d7d4",
-      "name": "Engagement Analyzer Agent"
-    },
-    "followup_composer": {
-      "agent_id": "699b571f67cd897226785e51",
-      "name": "Follow-Up Composer Agent"
+    "app_builder_agent": {
+      "agent_id": "699b5df3efd91aca1f09f67f",
+      "name": "App Builder Agent"
     }
   }
 }
