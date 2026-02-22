@@ -1,0 +1,38 @@
+{
+  "agent_name": "Engagement Analyzer Agent",
+  "agent_id": "699b570d1558055656c1d7d4",
+  "description": "Fetches recent sent emails and replies from Gmail, analyzes engagement signals (reply received, no response after 7 days, thread activity), and generates a structured engagement status report for each lead.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "leads": [
+      {
+        "name": "string",
+        "email": "string",
+        "organization": "string",
+        "status": "string",
+        "days_since_contact": "number",
+        "last_email_snippet": "string",
+        "thread_summary": "string"
+      }
+    ],
+    "analysis_summary": "string",
+    "total_analyzed": "number"
+  },
+  "example_response": {
+    "leads": [
+      {
+        "name": "sample string",
+        "email": "sample string",
+        "organization": "sample string",
+        "status": "One of: replied, no_response_7d, active_thread, recently_sent",
+        "days_since_contact": 0,
+        "last_email_snippet": "sample string",
+        "thread_summary": "sample string"
+      }
+    ],
+    "analysis_summary": "Overall summary of engagement analysis",
+    "total_analyzed": 0
+  }
+}

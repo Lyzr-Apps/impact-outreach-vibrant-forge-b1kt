@@ -1,0 +1,20 @@
+{
+  "agent_name": "Email Sender Agent",
+  "agent_id": "699b56fb67cd897226785e4f",
+  "description": "Sends user-approved emails to specified donor/founder recipients via Gmail. Handles both initial outreach and follow-up dispatches.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "send_status": "string",
+    "recipient": "string",
+    "message_id": "string",
+    "error_message": "string"
+  },
+  "example_response": {
+    "send_status": "Status of the email send operation: success or failed",
+    "recipient": "The recipient email address",
+    "message_id": "The Gmail message ID if successful",
+    "error_message": "Error details if the send failed"
+  }
+}

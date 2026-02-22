@@ -1,0 +1,12 @@
+{
+  "agent_name": "Follow-Up Composer Agent",
+  "agent_type": "json",
+  "accessor": "json",
+  "has_module_outputs": false,
+  "schema": {
+    "subject": "string",
+    "body": "string",
+    "followup_type": "string",
+    "strategy_notes": "string"
+  }
+}

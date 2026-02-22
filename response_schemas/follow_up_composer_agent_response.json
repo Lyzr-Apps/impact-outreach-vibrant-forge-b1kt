@@ -1,0 +1,20 @@
+{
+  "agent_name": "Follow-Up Composer Agent",
+  "agent_id": "699b571f67cd897226785e51",
+  "description": "Generates context-aware follow-up emails based on the engagement signal type \u2014 warm follow-up for link clicks, re-engagement for no-response, meeting request for replies. Maintains mission-driven tone throughout.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "subject": "string",
+    "body": "string",
+    "followup_type": "string",
+    "strategy_notes": "string"
+  },
+  "example_response": {
+    "subject": "The follow-up email subject line",
+    "body": "The full follow-up email body",
+    "followup_type": "The type of follow-up: warm_followup, re_engagement, or meeting_request",
+    "strategy_notes": "Brief notes on the follow-up strategy used"
+  }
+}

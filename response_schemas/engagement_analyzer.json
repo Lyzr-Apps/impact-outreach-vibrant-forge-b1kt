@@ -1,0 +1,11 @@
+{
+  "agent_name": "Engagement Analyzer Agent",
+  "agent_type": "json",
+  "accessor": "json",
+  "has_module_outputs": false,
+  "schema": {
+    "leads": "array of objects with: name, email, organization, status, days_since_contact, last_email_snippet, thread_summary",
+    "analysis_summary": "string",
+    "total_analyzed": "number"
+  }
+}

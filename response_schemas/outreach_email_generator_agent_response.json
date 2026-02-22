@@ -1,0 +1,18 @@
+{
+  "agent_name": "Outreach Email Generator Agent",
+  "agent_id": "699b56e499a581580fa60369",
+  "description": "Generates personalized cold outreach emails highlighting the welfare reform mission, tailored to donor/founder profile details (name, org, interests, giving history). Produces templated, mission-driven email content.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "subject": "string",
+    "body": "string",
+    "tone_notes": "string"
+  },
+  "example_response": {
+    "subject": "The email subject line",
+    "body": "The full email body content",
+    "tone_notes": "Brief notes on the tone and personalization approach used"
+  }
+}

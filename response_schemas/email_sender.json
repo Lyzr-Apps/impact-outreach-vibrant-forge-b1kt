@@ -1,0 +1,12 @@
+{
+  "agent_name": "Email Sender Agent",
+  "agent_type": "json",
+  "accessor": "json",
+  "has_module_outputs": false,
+  "schema": {
+    "send_status": "string",
+    "recipient": "string",
+    "message_id": "string",
+    "error_message": "string"
+  }
+}

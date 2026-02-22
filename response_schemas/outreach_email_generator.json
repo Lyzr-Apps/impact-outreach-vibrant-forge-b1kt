@@ -1,0 +1,11 @@
+{
+  "agent_name": "Outreach Email Generator Agent",
+  "agent_type": "json",
+  "accessor": "json",
+  "has_module_outputs": false,
+  "schema": {
+    "subject": "string",
+    "body": "string",
+    "tone_notes": "string"
+  }
+}
