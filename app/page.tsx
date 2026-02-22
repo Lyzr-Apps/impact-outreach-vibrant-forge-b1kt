@@ -32,6 +32,11 @@ import {
   HiOutlineBadgeCheck,
   HiOutlineTag,
   HiOutlineHeart,
+  HiOutlineShare,
+  HiOutlineChevronDown,
+  HiOutlineExternalLink,
+  HiOutlineLink,
+  HiOutlineGlobeAlt,
 } from 'react-icons/hi'
 
 // ---- Constants ----
@@ -44,7 +49,23 @@ const AGENT_IDS = {
 } as const
 
 const GOFUNDME_LINK = 'https://GoFundMe.me/3f8fbf1b2'
+const PERSONAL_APP_LINK = 'https://Address-Book-Plus.replit.app'
 const DONATION_FOOTER = `\n\n---\nSupport our welfare reform mission: ${GOFUNDME_LINK}`
+
+const SHARE_TARGETS = [
+  { name: 'X (Twitter)', key: 'twitter', color: 'hover:bg-gray-900 hover:text-white', buildUrl: (url: string, text: string) => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}` },
+  { name: 'Facebook', key: 'facebook', color: 'hover:bg-blue-600 hover:text-white', buildUrl: (url: string) => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}` },
+  { name: 'LinkedIn', key: 'linkedin', color: 'hover:bg-blue-700 hover:text-white', buildUrl: (url: string, text: string) => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` },
+  { name: 'WhatsApp', key: 'whatsapp', color: 'hover:bg-green-600 hover:text-white', buildUrl: (url: string, text: string) => `https://api.whatsapp.com/send?text=${encodeURIComponent(text + ' ' + url)}` },
+  { name: 'Reddit', key: 'reddit', color: 'hover:bg-orange-600 hover:text-white', buildUrl: (url: string, text: string) => `https://www.reddit.com/submit?url=${encodeURIComponent(url)}&title=${encodeURIComponent(text)}` },
+  { name: 'Telegram', key: 'telegram', color: 'hover:bg-sky-500 hover:text-white', buildUrl: (url: string, text: string) => `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}` },
+  { name: 'Email', key: 'email', color: 'hover:bg-gray-700 hover:text-white', buildUrl: (url: string, text: string) => `mailto:?subject=${encodeURIComponent(text)}&body=${encodeURIComponent(text + '\n\n' + url)}` },
+] as const
+
+const SHARE_ITEMS = [
+  { label: 'GoFundMe Campaign', url: GOFUNDME_LINK, text: 'Support our welfare reform mission! Donate here:' },
+  { label: 'Address Book Plus App', url: PERSONAL_APP_LINK, text: 'Check out Address Book Plus - a powerful contact management app:' },
+] as const
 
 const THEME_VARS = {
   '--background': '160 35% 96%',
@@ -353,6 +374,104 @@ function AgentInfoPanel({ activeAgentId }: { activeAgentId: string | null }) {
   )
 }
 
+// ---- Share Panel ----
+
+function SharePanel({ collapsed }: { collapsed: boolean }) {
+  const [open, setOpen] = useState(false)
+  const [copiedUrl, setCopiedUrl] = useState<string | null>(null)
+
+  const handleCopy = useCallback(async (url: string) => {
+    try {
+      await navigator.clipboard.writeText(url)
+      setCopiedUrl(url)
+      setTimeout(() => setCopiedUrl(null), 2000)
+    } catch {
+      // Fallback for older browsers
+      const ta = document.createElement('textarea')
+      ta.value = url
+      ta.style.position = 'fixed'
+      ta.style.opacity = '0'
+      document.body.appendChild(ta)
+      ta.select()
+      document.execCommand('copy')
+      document.body.removeChild(ta)
+      setCopiedUrl(url)
+      setTimeout(() => setCopiedUrl(null), 2000)
+    }
+  }, [])
+
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setOpen(prev => !prev)}
+        className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 bg-gradient-to-r from-indigo-500 to-violet-500 text-white hover:from-indigo-600 hover:to-violet-600 shadow-md shadow-indigo-500/20 ${collapsed ? 'justify-center px-2' : 'w-full'}`}
+        title="Share"
+      >
+        <HiOutlineShare className="w-5 h-5 flex-shrink-0" />
+        {!collapsed && (
+          <>
+            <span className="flex-1 text-left">Share</span>
+            <HiOutlineChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+          </>
+        )}
+      </button>
+
+      {open && (
+        <>
+          {/* Backdrop */}
+          <div className="fixed inset-0 z-30" onClick={() => setOpen(false)} />
+
+          {/* Dropdown */}
+          <div className={`absolute z-40 bottom-full mb-2 ${collapsed ? 'left-0' : 'left-0 right-0'} min-w-[280px] rounded-xl border border-border bg-white/95 backdrop-blur-lg shadow-xl shadow-black/10 overflow-hidden`}>
+            <div className="p-3 border-b border-border">
+              <p className="text-xs font-semibold text-foreground">Share with your network</p>
+              <p className="text-[10px] text-muted-foreground mt-0.5">Choose what to share and where</p>
+            </div>
+
+            <div className="max-h-[400px] overflow-y-auto">
+              {SHARE_ITEMS.map((item) => (
+                <div key={item.label} className="p-3 border-b border-border/50 last:border-b-0">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <HiOutlineGlobeAlt className="w-3.5 h-3.5 text-primary" />
+                      <span className="text-xs font-semibold text-foreground">{item.label}</span>
+                    </div>
+                    <button
+                      onClick={() => handleCopy(item.url)}
+                      className="flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-medium text-muted-foreground hover:bg-secondary transition-colors"
+                      title="Copy link"
+                    >
+                      <HiOutlineLink className="w-3 h-3" />
+                      {copiedUrl === item.url ? 'Copied' : 'Copy'}
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-4 gap-1.5">
+                    {SHARE_TARGETS.map((target) => (
+                      <a
+                        key={target.key}
+                        href={target.buildUrl(item.url, item.text)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex flex-col items-center gap-1 p-2 rounded-lg text-muted-foreground transition-all duration-200 ${target.color}`}
+                        title={`Share on ${target.name}`}
+                        onClick={() => setOpen(false)}
+                      >
+                        <HiOutlineExternalLink className="w-3.5 h-3.5" />
+                        <span className="text-[9px] font-medium leading-tight text-center">{target.name}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
+
 // ============================================================
 // MAIN PAGE
 // ============================================================
@@ -657,13 +776,14 @@ export default function Page() {
               </div>
             )}
 
-            {/* Donate button */}
-            <div className={`px-3 ${sidebarCollapsed ? 'flex justify-center' : ''}`}>
+            {/* Share & Donate buttons */}
+            <div className={`px-3 space-y-2 ${sidebarCollapsed ? '' : ''}`}>
+              <SharePanel collapsed={sidebarCollapsed} />
               <a
                 href="https://GoFundMe.me/3f8fbf1b2"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 bg-gradient-to-r from-rose-500 to-pink-500 text-white hover:from-rose-600 hover:to-pink-600 shadow-md shadow-rose-500/20 ${sidebarCollapsed ? 'justify-center px-2' : 'w-full'}`}
+                className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 bg-gradient-to-r from-rose-500 to-pink-500 text-white hover:from-rose-600 hover:to-pink-600 shadow-md shadow-rose-500/20 ${sidebarCollapsed ? 'justify-center px-2 w-full' : 'w-full'}`}
                 title="Support Our Mission"
               >
                 <HiOutlineHeart className="w-5 h-5 flex-shrink-0" />
